@@ -6,9 +6,25 @@ public class Fraction{
 		numerator=1;
 		denominator=1;
 	}
+	public Fraction(int num1, int num2){
+		numerator=num1;
+		denominator=num2;
+		if(denominator==0){
+			denominator=1;
+			System.out.println("Error: Denominator cannot be 0");
+		}
+	}
 	public Fraction(String input){
 		numerator=Integer.parseInt(input.substring(0,input.indexOf('/')));
 		denominator=Integer.parseInt(input.substring(input.indexOf('/')+1));
+		if(denominator==0){
+			denominator=1;
+			System.out.println("Error: Denominator cannot be 0");
+		}
+	}
+	public Fraction(Fraction f){
+		numerator=f.numerator;
+		denominator=f.denominator;
 		if(denominator==0){
 			denominator=1;
 			System.out.println("Error: Denominator cannot be 0");
@@ -27,12 +43,21 @@ public class Fraction{
 		return (double)numerator/denominator;
 	}
 	public void reduce(){
-		for (int i=Math.min(numerator, denominator);i>1;i--){
-			if(numerator%i==0 && denominator%i==0){
-				numerator/=i;
-				denominator/=i;
+		int gcf=Fraction.GCF(numerator, denominator);
+		numerator/=gcf;
+		denominator/=gcf;
+	}
+	private static int GCF(int num1, int num2){
+		while(num1!=num2){
+			if(num1>num2){
+				num1-=num2;
 			}
-		}
+			else{
+				num2-=num1;
+			}
+		}     
+		System.out.println(num1+" output");
+		return num1;
 	}
 	public void setNum(int input){
 		numerator=input;
@@ -43,6 +68,28 @@ public class Fraction{
 	public static Fraction multiply(Fraction a, Fraction b){
 		Fraction output=new Fraction(a.getNum()*b.getNum()+"/"+a.getDenom()*b.getDenom());
 		output.reduce();
+		return output;
+	}
+	public static Fraction divide(Fraction a, Fraction b){
+		Fraction newB=new Fraction(b.denominator+"/"+b.numerator);
+		Fraction output=Fraction.multiply(a,newB);
+		return output;
+	}
+	public static Fraction add(Fraction a, Fraction b){
+		int gcf=Fraction.GCF(a.denominator, b.denominator);
+		int newDenominator=a.denominator*b.denominator/gcf;
+		int newA=a.numerator*newDenominator/a.denominator;
+		int newB=b.numerator*newDenominator/b.denominator;
+		Fraction output=new Fraction((newA+newB)+"/"+newDenominator);
+		return output;
+	}
+	public static Fraction subtract(Fraction a, Fraction b){
+		int gcf=Fraction.GCF(a.denominator, b.denominator);
+		int newDenominator=a.denominator*b.denominator/gcf;
+		int newA=a.numerator*newDenominator/a.denominator;
+		int newB=b.numerator*newDenominator/b.denominator;
+		Fraction output=new Fraction((newA-newB)+"/"+newDenominator);
+
 		return output;
 	}
 		
