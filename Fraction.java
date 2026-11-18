@@ -55,8 +55,7 @@ public class Fraction{
 			else{
 				num2-=num1;
 			}
-		}     
-		System.out.println(num1+" output");
+		}
 		return num1;
 	}
 	public void setNum(int input){
