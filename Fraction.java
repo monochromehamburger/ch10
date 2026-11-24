@@ -36,6 +36,11 @@ public class Fraction{
 	public int getDenom(){
 		return denominator;
 	}
+	public boolean isEqual(Fraction f2){
+		if(numerator==f2.getNum() && denominator==f2.getDenom())return true;
+		if(Math.abs(numerator)==Math.abs(f2.getNum()) && Math.abs(denominator)==Math.abs(f2.getDenom()) && numerator*denominator == f2.getNum()*f2.getDenom())return true;
+		return false;
+	}
 	public String toString(){
 		return numerator+"/"+denominator;
 	}
@@ -83,7 +88,7 @@ public class Fraction{
 		return output;
 	}
 	public static Fraction subtract(Fraction a, Fraction b){
-		int gcf=Fraction.GCF(a.denominator, b.denominator);
+		int gcf=Fraction.GCF(Math.abs(a.denominator), Math.abs(b.denominator));
 		int newDenominator=a.denominator*b.denominator/gcf;
 		int newA=a.numerator*newDenominator/a.denominator;
 		int newB=b.numerator*newDenominator/b.denominator;
