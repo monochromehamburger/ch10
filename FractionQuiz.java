@@ -8,8 +8,8 @@ public class FractionQuiz{
 		int wrong=0;
 		while(true){
 		
-			Fraction f1=new Fraction((int)Math.ceil(Math.random()*10), (int)Math.ceil(Math.random()*10));
-			Fraction f2=new Fraction((int)Math.ceil(Math.random()*10), (int)Math.ceil(Math.random()*10));
+			Fraction f1=new Fraction();
+			Fraction f2=new Fraction();
 			f1.reduce();
 			f2.reduce();
 			double rand=Math.random();

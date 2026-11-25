@@ -3,8 +3,8 @@ public class Fraction{
 	private int numerator;
 	private int denominator;
 	public Fraction(){
-		numerator=1;
-		denominator=1;
+		numerator=(int)Math.ceil(Math.random()*10);
+		denominator=(int)Math.ceil(Math.random()*10);
 	}
 	public Fraction(int num1, int num2){
 		numerator=num1;
